@@ -54,3 +54,32 @@ function mergeSortedArrays(nums1, m, nums2, n) {
     back--;
   }
 }
+
+/*
+ 739. Daily Temperatures
+
+ Given an array of integers temperatures represents the daily temperatures, return an array answer such that answer[i] is the number of days you have to wait after the ith day to get a warmer temperature. If there is no future day for which this is possible, keep answer[i] == 0 instead.
+
+ */
+
+function dailyTemperatures(temperatures) {
+  const result = [];
+  let idx = 0;
+  let right = idx + 1;
+
+  while (idx < temperatures.length) {
+
+    if (right < temperatures.length && temperatures[right] > temperatures[idx]) {
+      result.push(right - idx);
+      idx++;
+      right = idx + 1;
+    } else if (right < temperatures.length && temperatures[right] <= temperatures[idx]) {
+      right++;
+    } else {
+      result.push(0);
+      idx++;
+      right = idx + 1;
+    }
+  }
+  return result;
+}
