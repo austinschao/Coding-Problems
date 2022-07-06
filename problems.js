@@ -83,3 +83,48 @@ function dailyTemperatures(temperatures) {
   }
   return result;
 }
+
+/*
+ 2325. Decode the Message
+
+ You are given the strings key and message, which represent a cipher key and a secret message, respectively. The steps to decode message are as follows:
+
+1. Use the first appearance of all 26 lowercase English letters in key as the order of the substitution table.
+2. Align the substitution table with the regular English alphabet.
+3. Each letter in message is then substituted using the table.
+4. Spaces ' ' are transformed to themselves.
+
+For example, given key = "happy boy" (actual key would have at least one instance of each letter in the alphabet), we have the partial substitution table of ('h' -> 'a', 'a' -> 'b', 'p' -> 'c', 'y' -> 'd', 'b' -> 'e', 'o' -> 'f').
+
+Return the decoded message.
+ */
+
+function decodeMessage(key, message) {
+  const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+  const subsitutionTable = {};
+  const keyWithoutSpaces = key.replaceAll(" ", "");
+  let ltrCount = 0;
+
+
+  for (let char of keyWithoutSpaces) {
+    // subsitutionTable[char] ??= alphabet[ltrCount];
+    // subsitutionTable[char] = subsitutionTable[char] || alphabet[ltrCount]
+    if (!subsitutionTable[char]) {
+      subsitutionTable[char] = alphabet[ltrCount];
+      ltrCount++;
+    }
+  }
+
+  let decodedMessage = "";
+
+  for (let i = 0; i < message.length; i++) {
+    if (subsitutionTable[message[i]]) {
+      decodedMessage += subsitutionTable[message[i]];
+    } else {
+      decodedMessage += message[i];
+    }
+  }
+
+  return decodedMessage;
+}
