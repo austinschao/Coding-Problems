@@ -150,3 +150,32 @@ function maxiumumWealth(accounts) {
   }
   return maxWealth;
 }
+
+/*
+435. Non-overlapping Intervals
+
+Given an array of intervals intervals where intervals[i] = [starti, endi], return the minimum number of intervals you need to remove to make the rest of the intervals non-overlapping.
+
+*/
+
+function nonOverlappingIntervals(intervals) {
+  if (intervals.length === 1) {
+    return 0;
+  }
+
+  const sortedIntervals = intervals.sort((a, b) => a[1] - b[1]);
+  let minIntervals = 0;
+  let left = 0;
+  let right = 1;
+
+  while (right <= sortedIntervals.length - 1) {
+    if (sortedIntervals[left][1] > sortedIntervals[right][0]) {
+      minIntervals++;
+      right++;
+    } else {
+      left = right;
+      right = left + 1;
+    }
+  }
+  return minIntervals;
+}
