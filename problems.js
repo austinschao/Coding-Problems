@@ -242,3 +242,26 @@ function averageSubarrays(arr, k) {
   }
   return averages;
 }
+
+/*
+Given an array of positive numbers and a positive number ‘S,’ find the length of the smallest contiguous subarray whose sum is greater than or equal to ‘S’. Return 0 if no such subarray exists.
+*/
+
+function smallestSubarraySum(arr, s) {
+  let smallestSubarrayLength = Infinity;
+  let tempSmallestSubArray = 0;
+  let windowStart = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    tempSmallestSubArray += arr[i];
+    while (tempSmallestSubArray >= s) {
+      smallestSubarrayLength = Math.min(smallestSubarrayLength, i - windowStart + 1);
+      tempSmallestSubArray -= arr[windowStart];
+      windowStart += 1;
+    }
+  }
+  if (smallestSubarrayLength === Infinity) {
+    return 0;
+  }
+  return smallestSubarrayLength;
+}
