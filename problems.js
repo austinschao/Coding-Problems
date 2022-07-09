@@ -224,3 +224,21 @@ function maxSubArray(nums) {
 
   return maxSum;
 };
+
+/*
+Given an array, find the average of all subarrays of ‘K’ contiguous elements in it.
+*/
+
+function averageSubarrays(arr, k) {
+  const averages = [];
+  let tempSubarraySum = 0, windowStart = 0;
+  for (let i = 0; i < arr.length; i++) {
+    tempSubarraySum += arr[i];
+    if (i >= k - 1) {
+      averages.push(tempSubarraySum / k);
+      tempSubarraySum -= arr[windowStart];
+      windowStart += 1;
+    }
+  }
+  return averages;
+}
