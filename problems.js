@@ -314,3 +314,46 @@ function maxArea(height) {
   }
   return maxArea;
 };
+
+
+/*
+113. Path Sum II
+
+Given the root of a binary tree and an integer targetSum, return all root-to-leaf paths where the sum of the node values in the path equals targetSum. Each path should be returned as a list of the node values, not node references.
+
+A root-to-leaf path is a path starting from the root and ending at any leaf node. A leaf is a node with no children.
+*/
+
+function pathSum(root, targetSum) {
+  const paths = [];
+
+  if (!root) {
+    return paths;
+  }
+
+  traverse(root);
+
+  function traverse(root, result = [], sum = 0) {
+    sum += root.val;
+    result.push(root.val);
+
+    if (root.left === null && root.right === null) {
+      if (sum === targetSum) {
+        paths.push([...result]);
+      }
+    }
+
+    if (root.left) {
+      traverse(root.left, result, sum);
+    }
+    if (root.right) {
+      traverse(root.right, result, sum);
+    }
+
+    result.pop();
+  }
+
+  return paths;
+}
+
+
