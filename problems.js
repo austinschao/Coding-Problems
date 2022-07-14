@@ -437,3 +437,27 @@ function majorityElement(nums) {
   return Array.from(majorityElements);
 };
 
+/*
+226. Given a root of a binary tree, invert the tree and return the root.
+*/
+
+function invertBT(root) {
+  function traverse(root) {
+    if (!root) {
+      return;
+    }
+
+    let leftChild = root.left;
+    let rightChild = root.right;
+
+    root.left = rightChild;
+    root.right = leftChild;
+
+    if (root.left) traverse(root.left);
+    if (root.right) traverse(root.right);
+  }
+
+  traverse(root);
+
+  return root;
+}
