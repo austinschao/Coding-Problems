@@ -416,4 +416,24 @@ function majorityElement(nums) {
   }
 };
 
+/*
+229. Majority Element II
+
+Given an integer array of size n, find all elements that appear more than ⌊ n/3 ⌋ times.
+
+*/
+
+function majorityElement(nums) {
+  const majorityElements = new Set();
+  const counter = {};
+
+  for (let i = 0; i < nums.length; i++) {
+    let val = counter[nums[i]] || 0;
+    counter[nums[i]] = val + 1;
+    if (counter[nums[i]] > nums.length / 3) {
+      majorityElements.add(nums[i]);
+    }
+  }
+  return Array.from(majorityElements);
+};
 
