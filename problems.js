@@ -314,7 +314,27 @@ function maxArea(height) {
   }
   return maxArea;
 };
+/*
+112. Path Sum
 
+Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf path such that adding up all the values along the path equals targetSum.
+ */
+
+function hasPathSum(root, targetSum) {
+  if (!root) {
+    return false;
+  }
+
+  targetSum -= root.val;
+
+  if (!root.left && !root.right) {
+    if (targetSum === 0) {
+      return true;
+    }
+  }
+
+  return hasPathSum(root.left, targetSum) || hasPathSum(root.right, targetSum);
+};
 
 /*
 113. Path Sum II
