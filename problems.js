@@ -447,6 +447,8 @@ function invertBT(root) {
       return;
     }
 
+    // [root.left, root.right] = [root.right, root.left] || works too
+
     let leftChild = root.left;
     let rightChild = root.right;
 
