@@ -376,4 +376,22 @@ function pathSum(root, targetSum) {
   return paths;
 }
 
+/*
+230. Kth Smallest Element in a BST
 
+Given the root of a binary search tree, and an integer k, return the kth smallest value (1-indexed) of all the values of the nodes in the tree.
+
+ */
+
+function kthSmallest(root, k) {
+  const sortedNodes = [];
+
+  function traverse(root) {
+    if (root.left) traverse(root.left);
+    sortedNodes.push(root.val);
+    if (root.right) traverse(root.right);
+  }
+  
+  traverse(root);
+  return sortedNodes[k - 1];
+};
