@@ -391,7 +391,29 @@ function kthSmallest(root, k) {
     sortedNodes.push(root.val);
     if (root.right) traverse(root.right);
   }
-  
+
   traverse(root);
   return sortedNodes[k - 1];
 };
+
+/*
+169. Majority Element
+
+Given an array nums of size n, return the majority element.
+
+The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+*/
+
+function majorityElement(nums) {
+  const count = {};
+
+  for (let i = 0; i < nums.length; i++) {
+    let val = count[nums[i]] || 0;
+    count[nums[i]] = val + 1;
+    if (count[nums[i]] > nums.length / 2) {
+      return nums[i];
+    }
+  }
+};
+
+
