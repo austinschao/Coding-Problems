@@ -1,3 +1,2 @@
 # Coding-Problems
-Solving LeetCode Problems
-Reviewing DSAs
+Solving LeetCode Problems & Reviewing DSAs
