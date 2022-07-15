@@ -463,3 +463,28 @@ function invertBT(root) {
 
   return root;
 }
+
+/*
+3. Longest Substring Without Repeating Characters
+
+Given a string s, find the length of the longest substring without repeating characters.
+*/
+
+function lengthOfLongestSubstring(s) {
+  let longestSubstring = 0;
+  let windowStart = 0;
+
+  for (let i = 0; i < s.length; i++) {
+    for (let j = windowStart; j < i; j++) {
+      // checks if the current letter matches any of the letters that will be checked
+      if (s[i] === s[j]) {
+        // Slides the window by 1
+        windowStart = j + 1;
+        break;
+      }
+    }
+    // +1 because we want the length
+    longestSubstring = Math.max(longestSubstring, i - windowStart + 1);
+  }
+  return longestSubstring;
+};
