@@ -539,3 +539,47 @@ function sumNumbers(root) {
   traverse(root);
   return totalSum;
 };
+
+/*
+116. Populating Next Right Pointers in Each Node
+
+You are given a perfect binary tree where all leaves are on the same level, and every parent has two children. The binary tree has the following definition:
+
+struct Node {
+  int val;
+  Node *left;
+  Node *right;
+  Node *next;
+}
+Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.
+
+Initially, all next pointers are set to NULL.
+*/
+
+var connect = function (root) {
+  if (!root || !root.left) return root;
+
+  root.left.next = root.right;
+
+  if (root.next) {
+    root.right.next = root.next.left;
+  }
+
+  connect(root.left);
+  connect(root.right);
+  //     if (!root) return null;
+  //     const queue = [root];
+
+  //     while (queue.length) {
+  //         const level = queue.slice();
+
+  //         for (let i = 0; i < level.length; i++) {
+  //             const curr = queue.shift();
+  //             curr.next = level[i + 1] || null;
+
+  //             if (curr.left) queue.push(curr.left);
+  //             if (curr.right) queue.push(curr.right);
+  //         }
+  //     }
+  return root;
+};
