@@ -488,3 +488,23 @@ function lengthOfLongestSubstring(s) {
   }
   return longestSubstring;
 };
+
+/*
+101. Symmetric Tree
+
+Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+*/
+
+function isSymmetric(root) {
+  if (!root) return true;
+
+  function traverse(left, right) {
+    if (!left && !right) return true;
+    if (!left || !right) return false;
+    if (left.val !== right.val) return false;
+
+    return traverse(left.left, right.right) && traverse(left.right, right.left);
+  }
+
+  return traverse(root.left, root.right);
+}
