@@ -111,15 +111,59 @@ Get total sum of tree
 const treeSumBFS = (root) => {
   if (!root) return 0;
 
-  let sum = 0;
+  let totalSum = 0;
   const queue = [root];
 
   while (queue.length) {
     const curr = queue.shift();
-    sum += curr.val;
+    totalSum += curr.val;
 
     if (curr.left) queue.push(curr.left);
     if (curr.right) queue.push(curr.right);
   }
-  return sum;
+  return totalSum;
+};
+
+/*
+DFS Recursive
+Find minimum value
+*/
+
+const treeMinValRecursive = (root) => {
+  if (!root) return Infinity;
+
+  return Math.min(root.val, treeMinValRecursive(root.left), treeMinValRecursive(root.right));
+};
+
+/*
+BFS Iterative
+Find minimum value
+Assume the tree is not empty
+*/
+
+const treeMinValBFS = (root) => {
+  let minVal = Infinity;
+  const queue = [root];
+
+  while (queue.length) {
+    const curr = queue.shift();
+    minVal = Math.min(minVal, curr.val);
+
+    if (curr.left) queue.push(curr.left);
+    if (curr.right) queue.push(curr.right);
+  }
+  return minVal;
+};
+
+/*
+DFS Recursive
+
+Find the max path sum from root to leaf
+*/
+
+const treeMaxPathSum = (root) => {
+  if (!root) return -Infinity;
+  if (!root.left && !root.right) return root.val;
+
+  return Math.max((root.val + treeMaxPathSum(root.left)), treeMaxPathSum(root.val + root.right));
 };
