@@ -508,3 +508,34 @@ function isSymmetric(root) {
 
   return traverse(root.left, root.right);
 }
+
+/*
+129. Sum Root to Leaf Numbers
+
+You are given the root of a binary tree containing digits from 0 to 9 only.
+
+Each root-to-leaf path in the tree represents a number.
+
+For example, the root-to-leaf path 1 -> 2 -> 3 represents the number 123.
+Return the total sum of all root-to-leaf numbers. Test cases are generated so that the answer will fit in a 32-bit integer.
+
+A leaf node is a node with no children.
+*/
+
+function sumNumbers(root) {
+  let totalSum = 0;
+
+  function traverse(root, path = "") {
+    if (!root) return 0;
+    path += root.val;
+
+    if (!root.left && !root.right) {
+      totalSum += Number(path);
+    }
+    traverse(root.left, path);
+    traverse(root.right, path);
+  }
+
+  traverse(root);
+  return totalSum;
+};
