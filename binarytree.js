@@ -60,3 +60,66 @@ const breadthFirstValues = (root) => {
 
   return result;
 };
+
+/*
+Breadth First Search
+Check if tree includes target
+*/
+const treeIncludesBFS = (root, target) => {
+  if (!root) {
+    return false;
+  }
+  const queue = [root];
+
+  while (queue.length) {
+    const curr = queue.shift();
+    if (curr.val === target) return true;
+
+    if (curr.left) queue.push(curr.left);
+    if (curr.right) queue.push(curr.right);
+  }
+  return false;
+};
+
+/*
+Recursive DFS
+Check if tree includes target
+*/
+const treeIncludesRecursive = (root, target) => {
+  if (!root) return false;
+  if (root.val === target) return true;
+
+  return treeIncludesRecursive(root.left, target) || treeIncludesRecursive(root.right, target);
+};
+
+/*
+Recursive DFS
+Get total sum of tree
+*/
+
+const treeSumRecursive = (root) => {
+  if (!root) return 0;
+
+  return root.val + treeSumRecursive(root.left) + treeSumRecursive(root.right);
+};
+
+/*
+BFS
+Get total sum of tree
+*/
+
+const treeSumBFS = (root) => {
+  if (!root) return 0;
+
+  let sum = 0;
+  const queue = [root];
+
+  while (queue.length) {
+    const curr = queue.shift();
+    sum += curr.val;
+
+    if (curr.left) queue.push(curr.left);
+    if (curr.right) queue.push(curr.right);
+  }
+  return sum;
+};
