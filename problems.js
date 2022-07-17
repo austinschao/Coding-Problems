@@ -673,3 +673,38 @@ function isValid(s) {
   }
   return stack.length === 0;
 };
+
+/*
+94. Binary Tree Inorder Traversal
+
+Given the root of a binary tree, return the inorder traversal of its nodes' values.
+*/
+
+function inorderTraversal(root) {
+  const result = [];
+  const stack = [];
+  let node = root;
+
+  // iteratively
+  while (stack.length || node !== null) {
+    if (node !== null) {
+      stack.push(node);
+      node = node.left;
+    } else {
+      node = stack.pop();
+      result.push(node.val);
+      node = node.right;
+    }
+  }
+
+  // recursively
+  function traverse(root) {
+    if (!root) return null;
+
+    if (root.left) traverse(root.left);
+    result.push(root.val);
+    if (root.right) traverse(root.right);
+  }
+
+  return result;
+}
