@@ -103,3 +103,30 @@ const findLLRecursively = (head, target) => {
   if (head.val == target) return true;
   return findLLRecursively(head.next, target);
 };
+
+/*
+Traverse through the Linked List iteratively and return the value of the given target idx
+*/
+const findIdxIteratively = (head, idx) => {
+  let count = 0;
+  let curr = head;
+
+  while (curr) {
+    if (count === idx) {
+      return curr.val;
+    }
+    count++;
+    curr = curr.next;
+  }
+  return -1;
+};
+
+/*
+Traverse through the Linked List recursively and return the value of the given target idx
+*/
+const findIdxRecursively = (head, target) => {
+  if (!head) return -1;
+  if (target === 0) return head.val;
+  target -= 1;
+  return findIdxRecursively(head.next, target);
+};
