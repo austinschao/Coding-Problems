@@ -51,6 +51,9 @@ Traverse through the Linked List recurively and return the node values in
 an array.
 */
 const linkedListVals = (head, result = []) => {
+  // could do this instead without a result variable
+  // if (!head) return [];
+  // return [head.val, ...linkedListVals(head.next)]
   if (!head) return;
   result.push(head.val);
   linkedListVals(head.next, result);
@@ -60,7 +63,6 @@ const linkedListVals = (head, result = []) => {
 /*
 Traverse through the Linked List iteratively and return the total sum of all nodes
 */
-
 const sumLLIteratively = (head) => {
   let totalSum = 0;
   let curr = head;
@@ -70,4 +72,12 @@ const sumLLIteratively = (head) => {
     curr = curr.next;
   }
   return totalSum;
+};
+
+/*
+Traverse through the Linked List recursively and return the total sum of all nodes
+*/
+const sumLLRecurisvely = (head) => {
+  if (!head) return 0;
+  return head.val + sumLLRecurisvely(head.next);
 };
