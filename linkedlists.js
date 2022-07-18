@@ -56,3 +56,18 @@ const linkedListVals = (head, result = []) => {
   linkedListVals(head.next, result);
   return result;
 };
+
+/*
+Traverse through the Linked List iteratively and return the total sum of all nodes
+*/
+
+const sumLLIteratively = (head) => {
+  let totalSum = 0;
+  let curr = head;
+
+  while (curr) {
+    totalSum += curr.val;
+    curr = curr.next;
+  }
+  return totalSum;
+};
