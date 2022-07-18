@@ -98,7 +98,6 @@ const treeIncludesRecursive = (root, target) => {
 Recursive DFS
 Get total sum of tree
 */
-
 const treeSumRecursive = (root) => {
   if (!root) return 0;
 
@@ -109,7 +108,6 @@ const treeSumRecursive = (root) => {
 BFS
 Get total sum of tree
 */
-
 const treeSumBFS = (root) => {
   if (!root) return 0;
 
@@ -130,7 +128,6 @@ const treeSumBFS = (root) => {
 DFS Recursive
 Find minimum value
 */
-
 const treeMinValRecursive = (root) => {
   if (!root) return Infinity;
 
@@ -142,7 +139,6 @@ BFS Iterative
 Find minimum value
 Assume the tree is not empty
 */
-
 const treeMinValBFS = (root) => {
   let minVal = Infinity;
   const queue = [root];
@@ -162,7 +158,6 @@ DFS Recursive
 
 Find the max path sum from root to leaf
 */
-
 const treeMaxPathSum = (root) => {
   if (!root) return -Infinity;
   if (!root.left && !root.right) return root.val;
