@@ -1,15 +1,15 @@
 "use strict";
 
 class LinkedList {
-  constructor() {
+  constructor(head) {
     this.head = null;
     this.tail = null;
-    this.length = 0;
   }
 }
 
 class Node {
   constructor(val) {
+    this._ll = [];
     this.val = val;
     this.next = null;
   }
@@ -34,3 +34,15 @@ const printLinkedList = (head) => {
     curr = curr.next;
   }
 };
+
+/*
+Traverse through the Linked List recursively and print each node value
+*/
+
+const printLLRecursively = (head) => {
+  if (!head) {
+    return;
+  }
+  console.log(head.val);
+  printLLRecursively(head.next);
+}
