@@ -15,10 +15,10 @@ class Node {
   }
 }
 
-const a = new Node('A');
-const b = new Node('B');
-const c = new Node('C');
-const d = new Node('D');
+const a = new Node('a');
+const b = new Node('b');
+const c = new Node('c');
+const d = new Node('d');
 
 a.next = b;
 b.next = c;
@@ -80,4 +80,26 @@ Traverse through the Linked List recursively and return the total sum of all nod
 const sumLLRecurisvely = (head) => {
   if (!head) return 0;
   return head.val + sumLLRecurisvely(head.next);
+};
+
+/*
+Traverse through the Linked List iteratively and return true if the target is found.
+*/
+const findLLIteratively = (head, target) => {
+  let curr = head;
+
+  while (curr) {
+    if (curr.val === target) return true;
+    curr = curr.next;
+  }
+  return false;
+};
+
+/*
+Traverse through the Linked List recursively and return true if the target is found.
+*/
+const findLLRecursively = (head, target) => {
+  if (!head) return false;
+  if (head.val == target) return true;
+  return findLLRecursively(head.next, target);
 };
