@@ -1,3 +1,5 @@
+"use strict";
+
 class Node {
   constructor(val) {
     this.val = val;
