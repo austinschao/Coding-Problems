@@ -29,6 +29,7 @@ Traverse through the Linked List iteratively and print each node value
 */
 const printLinkedList = (head) => {
   let curr = head;
+
   while (curr) {
     console.log(curr.val);
     curr = curr.next;
@@ -38,11 +39,20 @@ const printLinkedList = (head) => {
 /*
 Traverse through the Linked List recursively and print each node value
 */
-
 const printLLRecursively = (head) => {
-  if (!head) {
-    return;
-  }
+  if (!head) return;
+
   console.log(head.val);
   printLLRecursively(head.next);
-}
+};
+
+/*
+Traverse through the Linked List recurively and return the node values in
+an array.
+*/
+const linkedListVals = (head, result = []) => {
+  if (!head) return;
+  result.push(head.val);
+  linkedListVals(head.next, result);
+  return result;
+};
