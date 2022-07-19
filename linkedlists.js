@@ -188,7 +188,7 @@ const zipperListsIteratively = (list1, list2) => {
 };
 
 /*
-Traverse through two Linked Lists recursively and merge them together one by one
+Traverse through two Linked Lists recursively and zipper them together one by one
 */
 const zipperListsRecursively = (list1, list2) => {
   if (!list1 && !list2) return null;
