@@ -1,12 +1,5 @@
 "use strict";
 
-class LinkedList {
-  constructor(head) {
-    this.head = null;
-    this.tail = null;
-  }
-}
-
 class Node {
   constructor(val) {
     this.val = val;
