@@ -147,4 +147,16 @@ const reverseLLIteratively = (head) => {
     curr = next;
   }
   return prev;
-}
+};
+
+/*
+Traverse through the Linked List recursively and reverse it. Return the Linked List
+*/
+const reverseLLRecursively = (head, prev = null) => {
+  if (!head) return prev;
+
+  const next = head.next;
+  head.next = prev;
+
+  return reverseLLRecursively(next, head);
+};
