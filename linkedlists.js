@@ -130,3 +130,21 @@ const findIdxRecursively = (head, target) => {
   target -= 1;
   return findIdxRecursively(head.next, target);
 };
+
+/*
+Traverse through the Linked List iteratively and reverse it. Return the Linked List
+*/
+const reverseLLIteratively = (head) => {
+  let curr = head;
+  let prev = null;
+
+  if (!head) return prev;
+
+  while (curr) {
+    const next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = next;
+  }
+  return prev;
+}
