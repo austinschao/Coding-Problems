@@ -9,7 +9,6 @@ class LinkedList {
 
 class Node {
   constructor(val) {
-    this._ll = [];
     this.val = val;
     this.next = null;
   }
@@ -19,6 +18,16 @@ const a = new Node('a');
 const b = new Node('b');
 const c = new Node('c');
 const d = new Node('d');
+
+const e = new Node('e');
+const f = new Node('f');
+const g = new Node('g');
+const h = new Node('h');
+
+e.next = f;
+f.next = g;
+g.next = h;
+
 
 a.next = b;
 b.next = c;
@@ -159,4 +168,45 @@ const reverseLLRecursively = (head, prev = null) => {
   head.next = prev;
 
   return reverseLLRecursively(next, head);
+};
+
+/*
+Traverse through two Linked Lists iteratively and merge them together one by one
+*/
+const zipperListsIteratively = (list1, list2) => {
+  let curr1 = list1.next;
+  let curr2 = list2;
+  let tail = list1;
+  let count = 0;
+
+  while (curr1 && curr2) {
+    if (count % 2 === 0) {
+      tail.next = curr2;
+      curr2 = curr2.next;
+    } else {
+      tail.next = curr1;
+      curr1 = curr1.next;
+    }
+    tail = tail.next;
+    count++;
+  }
+  tail.next = curr1 ? curr1 : curr2;
+  return list1;
+};
+
+/*
+Traverse through two Linked Lists recursively and merge them together one by one
+*/
+const zipperListsRecursively = (list1, list2) => {
+  if (!list1 && !list2) return null;
+  if (!list1) return list2;
+  if (!list2) return list1;
+
+  const next1 = list1.next;
+  const next2 = list2.next;
+
+  list1.next = list2;
+  list2.next = zipperListsRecursively(next1, next2);
+
+  return list1;
 };
