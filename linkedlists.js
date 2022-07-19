@@ -203,3 +203,48 @@ const zipperListsRecursively = (list1, list2) => {
 
   return list1;
 };
+
+/*
+Merge two Linked Lists in ascending order iteratively
+*/
+const mergeListsIteratively = (head1, head2) => {
+  let curr1 = head1;
+  let curr2 = head2;
+  let head = new Node(null);
+  let tail = head;
+
+  while (curr1 && curr2) {
+    if (curr1.val < curr2.val) {
+      tail.next = curr1;
+      curr1 = curr1.next;
+    } else {
+      tail.next = curr2;
+      curr2 = curr2.next;
+    }
+    tail = tail.next;
+  }
+
+  if (curr1) tail.next = curr1;
+  if (curr2) tail.next = curr2;
+
+  return head.next;
+};
+
+/*
+Merge two Linked Lists in ascending order recursively
+*/
+const mergeListsRecursively = (head1, head2) => {
+  if (!head1 && !head2) return null;
+  if (!head1) return head2;
+  if (!head2) return head1;
+
+  if (head1.val < head2.val) {
+    const next1 = head1.next;
+    head1.next = mergeListsRecursively(next1, head2);
+    return head1;
+  } else {
+    const next2 = head2.next;
+    head2.next = mergeListsRecursively(head1, next2);
+    return head2;
+  }
+};
