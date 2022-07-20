@@ -164,3 +164,24 @@ const treeMaxPathSum = (root) => {
 
   return Math.max((root.val + treeMaxPathSum(root.left)), treeMaxPathSum(root.val + root.right));
 };
+
+/*
+Return an array representing a path to the target value from the root. If the target is not found, return null.
+*/
+const pathFinder = (root, target) => {
+  if (!root) return null;
+  if (root.val === target) return [root.val];
+
+  const leftPath = pathFinder(root.left, target);
+  const rightPath = pathFinder(root.right, target);
+
+  if (leftPath) {
+    return [root.val].concat(leftPath);
+  }
+
+  if (rightPath) {
+    return [root.val].concat(rightPath);
+  }
+
+  return null;
+};
