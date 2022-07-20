@@ -185,3 +185,31 @@ const pathFinder = (root, target) => {
 
   return null;
 };
+
+/*
+Return the number of times the target appears in the tree.
+*/
+const treeValueCount = (root, target) => {
+  //recursively
+  if (!root) return 0;
+  if (root.val === target) return 1 + treeValueCount(root.left, target) + treeValueCount(root.right, target);
+
+  const leftPathCount = treeValueCount(root.left, target);
+  const rightPathCount = treeValueCount(root.right, target);
+
+  return leftPathCount + rightPathCount;
+
+  //iteratively
+  // if (!root) return 0;
+
+  // let count = 0;
+  // const queue = [root];
+  // while (queue.length) {
+  //   const curr = queue.shift();
+  //   if (curr.val === target) count++;
+
+  //   if (curr.right) queue.push(curr.right);
+  //   if (curr.left) queue.push(curr.left);
+  // }
+  // return count;
+};
