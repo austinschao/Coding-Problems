@@ -213,3 +213,11 @@ const treeValueCount = (root, target) => {
   // }
   // return count;
 };
+
+/*
+Return the height of the tree, if it is empty return -1.
+*/
+const howHigh = (node) => {
+  if (!node) return -1;
+  return 1 + Math.max(howHigh(node.left), howHigh(node.right));
+};
