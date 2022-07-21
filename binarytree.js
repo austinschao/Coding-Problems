@@ -323,3 +323,33 @@ const treeLevels = (root, level = 0, levels = []) => {
   //   }
   // return result;
 };
+
+/*
+Return the average of each level in the binary tree.
+*/
+const levelAverages = (root) => {
+  const levels = [];
+  fillLevels(root, levels, 0);
+  return levels.map(findAvg);
+};
+
+const fillLevels = (root, levels, levelNum) => {
+  if (!root) return;
+
+  if (levels[levelNum]) {
+    levels[levelNum].push(root.val);
+  } else {
+    levels.push([root.val]);
+  }
+
+  fillLevels(root.left, levels, levelNum + 1);
+  fillLevels(root.right, levels, levelNum + 1);
+};
+
+const findAvg = (arr) => {
+  let sum = 0;
+  for (let num of arr) {
+    sum += num;
+  }
+  return sum / arr.length;
+};
