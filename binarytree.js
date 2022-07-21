@@ -353,3 +353,25 @@ const findAvg = (arr) => {
   }
   return sum / arr.length;
 };
+
+/*
+Return all the leaves in left to right order.
+*/
+const leafList = (root) => {
+  if (!root) return [];
+  const leaves = [];
+
+  const traverse = (root) => {
+    if (!root) return;
+
+    if (!root.left && !root.right) {
+      leaves.push(root.val);
+    }
+    traverse(root.left);
+    traverse(root.right);
+  };
+  traverse(root)
+
+  return leaves;
+};
+
