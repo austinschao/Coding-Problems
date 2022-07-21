@@ -255,3 +255,71 @@ const allTreePaths = (root) => {
 
   return paths;
 };
+
+/*
+Return a 2-D array where each subarray represents a level of the tree.
+*/
+const treeLevels = (root, level = 0, levels = []) => {
+  // Recursively
+  if (!root) return [];
+
+  if (levels[level]) {
+    levels[level].push(root.val);
+  } else {
+    levels[level] = [root.val];
+  }
+
+  level += 1;
+
+  if (root.left) treeLevels(root.left, level, levels);
+  if (root.right) treeLevels(root.right, level, levels);
+
+  return levels;
+
+  //   DFS Iteratively
+  //   if (!root) return [];
+
+  //   const result = [];
+  //   const stack = [{node:root, level: 0}]
+
+  //   while (stack.length) {
+  //     const {node, level} = stack.pop();
+
+  //     if (result[level]) {
+  //       result[level].push(node.val);
+  //     } else {
+  //       result.push([node.val]);
+  //     }
+  // return result;
+
+
+  //     if (node.right) stack.push({node: node.right, level: level + 1})
+  //     if (node.left) stack.push({node: node.left, level: level + 1})
+  //   }
+
+  //   BFS
+  //   while (queue.length) {
+  //     if (!result.length) {
+  //       result.push(tempLevel);
+  //       tempLevel = [];
+  //     }
+
+  //     const curr = queue.shift();
+
+  //     if (!result[result.length-1].includes(curr.val)) {
+  //       result.push(tempLevel);
+  //       tempLevel = [];
+  //     }
+
+  //     if (curr.left) {
+  //       queue.push(curr.left);
+  //       tempLevel.push(curr.left.val);
+  //     }
+
+  //     if (curr.right) {
+  //       queue.push(curr.right);
+  //       tempLevel.push(curr.right.val);
+  //     }
+  //   }
+  // return result;
+};
