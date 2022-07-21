@@ -236,3 +236,22 @@ const bottomRightValue = (root) => {
   }
   return curr.val;
 };
+
+/*
+Return a 2-Dimensional array where each subarray represents a root-to-leaf path in the tree.
+*/
+const allTreePaths = (root) => {
+  if (!root) return [];
+  if (!root.left && !root.right) return [[root.val]];
+
+  const leftPath = allTreePaths(root.left);
+  const rightPath = allTreePaths(root.right);
+
+  const paths = leftPath.concat(rightPath);
+
+  for (let path of paths) {
+    path.unshift(root.val);
+  }
+
+  return paths;
+};
