@@ -248,3 +248,19 @@ const mergeListsRecursively = (head1, head2) => {
     return head2;
   }
 };
+
+/*
+Return a boolean if the Linked Lists contains one unique value.
+*/
+const isUnivalueList = (head, prev = null) => {
+  //   let curr = head;
+
+  //   while(curr) {
+  //     if (curr.val !== head.val) return false;
+  //     curr = curr.next;
+  //   }
+  //   return true;
+  if (!head) return true;
+  if (head.val !== prev && prev) return false;
+  return isUnivalueList(head.next, head.val);
+};
