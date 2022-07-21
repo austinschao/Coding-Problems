@@ -221,3 +221,18 @@ const howHigh = (node) => {
   if (!node) return -1;
   return 1 + Math.max(howHigh(node.left), howHigh(node.right));
 };
+
+/*
+Return the right-most value in the bottom-most level of the tree.
+*/
+const bottomRightValue = (root) => {
+  const queue = [root];
+  let curr;
+
+  while (queue.length) {
+    curr = queue.shift();
+    if (curr.left) queue.push(curr.left);
+    if (curr.right) queue.push(curr.right);
+  }
+  return curr.val;
+};
