@@ -902,3 +902,39 @@ function matrixReshape(mat, r, c) {
   }
   return result;
 };
+
+/*
+200. Number of Islands
+
+Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.
+
+An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+*/
+
+function numIslands(grid) {
+  function findIslands(grid, row, col) {
+    if (row === grid.length || row < 0) return;
+    if (col === grid[0].length || col < 0) return;
+
+    if (grid[row][col] === "1") {
+      grid[row][col] = "0";
+      findIslands(grid, row + 1, col);
+      findIslands(grid, row, col + 1);
+      findIslands(grid, row - 1, col);
+      findIslands(grid, row, col - 1);
+    }
+  }
+
+  let islands = 0;
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      if (grid[i][j] === '1') {
+        islands += 1;
+        grid[i][j] = '0';
+        findIslands(grid, i + 1, j);
+        findIslands(grid, i, j + 1);
+      }
+    }
+  }
+  return islands;
+};
