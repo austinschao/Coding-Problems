@@ -298,3 +298,47 @@ const insertNode = (head, value, index) => {
 
   //   return head;
 };
+
+/*
+Add two linked lists together that represents a number.
+*/
+const addLists = (head1, head2) => {
+  //   if (!head1 && !head2 && !carry) return null;
+
+  //   const val1 = head1 ? head1.val : 0;
+  //   const val2 = head2 ? head2.val : 0;
+
+  //   const sum = val1 + val2 + carry;
+  //   const carryNext = sum > 9 ? 1 : 0;
+  //   const digit = sum % 10;
+
+  //   const resultNode = new Node(digit);
+
+  //   const next1 = head1 ? head1.next : null;
+  //   const next2 = head2 ? head2.next : null;
+  //   resultNode.next = addLists(next1, next2, carryNext);
+  //   return resultNode;
+  const head = new Node(null);
+  let tail = head;
+
+  let curr1 = head1;
+  let curr2 = head2;
+  let carry = 0;
+
+  while (curr1 || curr2 || carry) {
+    const val1 = curr1 ? curr1.val : 0;
+    const val2 = curr2 ? curr2.val : 0;
+
+    const sum = val1 + val2 + carry;
+    const digit = sum % 10;
+    carry = sum > 9 ? 1 : 0;
+
+    const node = new Node(digit);
+    tail.next = node;
+    tail = tail.next;
+
+    curr1 = curr1 ? curr1.next : null;
+    curr2 = curr2 ? curr2.next : null;
+  }
+  return head.next;
+};
