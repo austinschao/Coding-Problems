@@ -264,3 +264,37 @@ const isUnivalueList = (head, prev = null) => {
   if (head.val !== prev && prev) return false;
   return isUnivalueList(head.next, head.val);
 };
+
+/*
+Insert a node at a given index.
+*/
+const insertNode = (head, value, index) => {
+  const newHead = new Node(value);
+
+  if (index === 0) {
+    newHead.next = head;
+    return newHead;
+  }
+  let curr = head;
+  let next = curr.next;
+  let count = index - 1;
+
+  while (count > 0) {
+    curr = curr.next;
+    next = curr.next;
+    count--;
+  }
+
+  curr.next = newHead;
+  newHead.next = next;
+
+  return head;
+  //   if (index === 0) {
+  // const newHead = new Node(value);
+  //     newHead.next = head;
+  //     return newHead;
+  //   }
+  //   head.next = insertNode(head.next, value, index - 1)
+
+  //   return head;
+};
