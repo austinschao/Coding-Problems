@@ -1,5 +1,5 @@
 /*
-Check if there is a path between the source and destination node of the graph.
+Check if there is a path between the source and destination node of the directed graph.
 */
 const hasPath = (graph, src, dst) => {
   //   const stack = [src];
@@ -27,6 +27,62 @@ const hasPath = (graph, src, dst) => {
 
   for (let neighbor of graph[src]) {
     if (hasPath(graph, neighbor, dst)) {
+      return true;
+    }
+  }
+  return false;
+};
+
+/*
+Check if there is a path between two nodes in an undirected graph.
+*/
+const undirectedPath = (edges, nodeA, nodeB) => {
+  const graph = buildGraph(edges);
+  // const stack = [nodeA];
+  const hasSeen = new Set();
+
+
+  return findPath(graph, hasSeen, nodeA, nodeB);
+
+  //   while (stack.length) {
+  //     const curr = stack.pop();
+  //     if (curr === nodeB) return true;
+
+  //     if (!hasSeen.has(curr)) {
+  //       hasSeen.add(curr);
+  //     } else {
+  //       continue;
+  //     }
+
+  //     for (let neighbor of graph[curr]) {
+  //       stack.push(neighbor);
+  //     }
+  //   }
+
+  //   return false;
+};
+
+const buildGraph = (edges) => {
+  const graph = {};
+
+  for (let edge of edges) {
+    const [a, b] = edge;
+    if (!graph[a]) graph[a] = [];
+    if (!graph[b]) graph[b] = [];
+    graph[a].push(b);
+    graph[b].push(a);
+  }
+  return graph;
+};
+
+const findPath = (graph, hasSeen, nodeA, nodeB) => {
+  if (hasSeen.has(nodeA)) return;
+  if (nodeA === nodeB) return true;
+
+  hasSeen.add(nodeA);
+
+  for (let neighbor of graph[nodeA]) {
+    if (findPath(graph, hasSeen, neighbor, nodeB)) {
       return true;
     }
   }
