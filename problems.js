@@ -938,3 +938,52 @@ function numIslands(grid) {
   }
   return islands;
 };
+
+/*
+2. Add Two Numbers
+
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+*/
+
+function addTwoNumbers(head1, head2, carry = 0) {
+  //   const head = new ListNode(null);
+  //   let tail = head;
+
+  //   let curr1 = head1;
+  //   let curr2 = head2;
+  //   let carry = 0;
+
+  //   while (curr1 || curr2 || carry) {
+  //     const val1 = curr1 ? curr1.val : 0;
+  //     const val2 = curr2 ? curr2.val : 0;
+
+  //     const sum = val1 + val2 + carry;
+  //     const digit = sum % 10;
+  //     carry = sum > 9 ? 1 : 0;
+
+  //     const node = new ListNode(digit);
+  //     tail.next = node;
+  //     tail = tail.next;
+
+  //     curr1 = curr1 ? curr1.next : null;
+  //     curr2 = curr2 ? curr2.next : null;
+  //   }
+  //   return head.next;
+  if (!head1 && !head2 && !carry) return null;
+
+  const val1 = head1 ? head1.val : 0;
+  const val2 = head2 ? head2.val : 0;
+
+  const sum = val1 + val2 + carry;
+  const carryNext = sum > 9 ? 1 : 0;
+  const digit = sum % 10;
+
+  const resultNode = new ListNode(digit);
+
+  const next1 = head1 ? head1.next : null;
+  const next2 = head2 ? head2.next : null;
+  resultNode.next = addTwoNumbers(next1, next2, carryNext);
+  return resultNode;
+};
