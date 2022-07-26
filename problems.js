@@ -987,3 +987,62 @@ function addTwoNumbers(head1, head2, carry = 0) {
   resultNode.next = addTwoNumbers(next1, next2, carryNext);
   return resultNode;
 };
+
+/*
+1971. Find if Path Exists in Graph
+
+There is a bi-directional graph with n vertices, where each vertex is labeled from 0 to n - 1 (inclusive). The edges in the graph are represented as a 2D integer array edges, where each edges[i] = [ui, vi] denotes a bi-directional edge between vertex ui and vertex vi. Every vertex pair is connected by at most one edge, and no vertex has an edge to itself.
+
+You want to determine if there is a valid path that exists from vertex source to vertex destination.
+
+Given edges and the integers n, source, and destination, return true if there is a valid path from source to destination, or false otherwise.
+*/
+const validPath = (n, edges, source, destination) => {
+  if (source === destination) return true;
+
+  const graph = buildGraph(edges);
+  const visited = new Set();
+  return hasPath(graph, source, destination, visited);
+  //     const stack = [source];
+
+  //     while (stack.length) {
+  //         const curr = stack.pop();
+  //         if (curr === destination) return true;
+
+  //         visited.add(curr);
+
+  //         for (let neighbor of graph[curr]) {
+  //             if (!visited.has(neighbor)) {
+  //                 stack.push(neighbor);
+  //             }
+  //         }
+  //     }
+  //     return false;
+};
+
+const buildGraph = (edges) => {
+  const graph = {};
+
+  for (let edge of edges) {
+    const [a, b] = edge;
+    if (!graph[a]) graph[a] = [];
+    if (!graph[b]) graph[b] = [];
+    graph[a].push(b);
+    graph[b].push(a);
+  }
+  return graph;
+};
+
+const hasPath = (graph, src, dst, visited) => {
+  if (src === dst) return true;
+  if (visited.has(src)) return false;
+
+  visited.add(src);
+
+  for (let neighbor of graph[src]) {
+    if (hasPath(graph, neighbor, dst, visited)) {
+      return true;
+    }
+  }
+  return false;
+};
