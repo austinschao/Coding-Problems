@@ -88,3 +88,29 @@ const findPath = (graph, hasSeen, nodeA, nodeB) => {
   }
   return false;
 };
+
+/*
+Return the number of connected components within an undirected graph.
+*/
+const connectedComponentsCount = (graph) => {
+  const hasVisited = new Set();
+  let count = 0;
+
+  for (let node in graph) {
+    if (traverseComponent(graph, node, hasVisited)) {
+      count++;
+    }
+  }
+
+  return count;
+};
+
+const traverseComponent = (graph, curr, visited) => {
+  if (visited.has(String(curr))) return false;
+  visited.add(String(curr));
+
+  for (let neighbor of graph[curr]) {
+    traverseComponent(graph, neighbor, visited);
+  }
+  return true;
+};
