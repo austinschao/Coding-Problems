@@ -1046,3 +1046,63 @@ const hasPath = (graph, src, dst, visited) => {
   }
   return false;
 };
+
+
+/*
+Implement a document scanning function wordCountEngine, which receives a string document and returns a list of all unique words in it and their number of occurrences, sorted by the number of occurrences in a descending order. If two or more words have the same count, they should be sorted according to their order in the original sentence. Assume that all letters are in english alphabet. You function should be case-insensitive, so for instance, the words “Perfect” and “perfect” should be considered the same word.
+
+The engine should strip out punctuation (even in the middle of a word) and use whitespaces to separate words.
+
+Analyze the time and space complexities of your solution. Try to optimize for time while keeping a polynomial space complexity.
+
+Examples:
+
+input:  document = "Practice makes perfect. you'll only
+                    get Perfect by practice. just practice!"
+
+output: [ ["practice", "3"], ["perfect", "2"],
+          ["makes", "1"], ["youll", "1"], ["only", "1"],
+          ["get", "1"], ["by", "1"], ["just", "1"] ]
+
+
+input: document = "Practice makes perfect. Perfect is practice."
+output = [["practice", "2"], ["makes", "1"], ["perfect" , "2",], ["is", "1"]]
+
+Iterate through the document and create a new string without punctuations
+
+Create an object that will store the count of each word and its order in the document
+
+Iterate through the new string and add key value pairs to the object.
+*/
+
+function wordCountEngine(document) {
+  const punctuation = ".!,'?";
+  let documentWithoutPunctuation = "";
+
+  for (let char of document) {
+    if (!punctuation.includes(char)) {
+      documentWithoutPunctuation += char;
+    }
+  }
+
+  const splitDocument = documentWithoutPunctuation.split(" ");
+  const wordCount = {};
+  const result = [];
+
+  for (let i = 0; i < splitDocument.length; i++) {
+    const lowerCaseWord = word.toLowerCase();
+    if (wordCount[lowerCaseWord]) {
+      wordCount[lowerCaseWord].count += 1;
+    } else {
+      wordCount[lowerCaseWord] = { pos: i, count: 1 };
+    }
+  }
+
+  for (let word in wordCount) {
+    result.push([word, String(wordCount[word].count)]);
+  }
+
+  result.sort((a, b) => b[1] === a[1] ? wordCount[[a][0]].pos - wordCount[[b][0]].pos : b[1] - a[1]);
+
+  return result;
+}
