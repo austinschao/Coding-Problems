@@ -76,8 +76,8 @@ const buildGraph = (edges) => {
 };
 
 const findPath = (graph, hasSeen, nodeA, nodeB) => {
-  if (hasSeen.has(nodeA)) return;
   if (nodeA === nodeB) return true;
+  if (hasSeen.has(nodeA)) return;
 
   hasSeen.add(nodeA);
 
