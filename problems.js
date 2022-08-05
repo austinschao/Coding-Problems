@@ -1174,3 +1174,87 @@ const findCycle = (node, visited) => {
   }
   return false;
 };
+
+/*
+You are given an integer array ranks and a character array suits. You have 5 cards where the ith card has a rank of ranks[i] and a suit of suits[i].
+
+The following are the types of poker hands you can make from best to worst:
+
+"Flush": Five cards of the same suit.
+"Three of a Kind": Three cards of the same rank.
+"Pair": Two cards of the same rank.
+"High Card": Any single card.
+Return a string representing the best type of poker hand you can make with the given cards.
+
+ranks (1- 13)
+suits (ABCD)
+
+Create an object to store the count of the cards
+Iterate through ranks and add each card to the object
+After iteration, create conditions to check for the best hand
+
+[1,3,3,3,3]
+[A, A, A, A, B]
+
+*/
+function findBestHand(ranks, suits) {
+  const rankCount = {};
+  const suitCount = {};
+
+  for (let num of ranks) {
+    let count = rankCount[num] || 0;
+    if (count !== 3) {
+      rankCount[num] = count + 1;
+    }
+  }
+
+  for (let suit of suits) {
+    let count = suitCount[suit] || 0;
+    suitCount[suit] = count + 1;
+  }
+
+  if (Object.keys(suitCount).length === 1) {
+    return "Flush";
+  }
+
+  const cards = new Set(Object.values(rankCount));
+  if (cards.has(3)) return "Three of a Kind";
+  if (cards.has(2)) return "Pair";
+  return "High Card";
+}
+
+/*
+62. Unique Paths
+
+There is a robot on an m x n grid. The robot is initially located at the top-left corner (i.e., grid[0][0]). The robot tries to move to the bottom-right corner (i.e., grid[m - 1][n - 1]). The robot can only move either down or right at any point in time.
+
+Given the two integers m and n, return the number of possible unique paths that the robot can take to reach the bottom-right corner.
+
+The test cases are generated so that the answer will be less than or equal to 2 * 109.
+*/
+const uniquePaths = (m, n) => {
+  let totalPaths = 0;
+  totalPaths += findPath(m, n, 0, 0);
+
+  return totalPaths;
+};
+
+const findPath = (m, n, row, col, memo = {}) => {
+  const rowInbounds = 0 <= row && row < m;
+  const colInbounds = 0 <= col && col < n;
+  if (!rowInbounds || !colInbounds) return 0;
+
+  const pos = row + "," + col;
+  const target = (m - 1) + "," + (n - 1);
+
+  if (pos === target) return 1;
+  if (pos in memo) return memo[pos];
+
+  let totalPaths = 0;
+
+  totalPaths += findPath(m, n, row + 1, col, memo);
+  totalPaths += findPath(m, n, row, col + 1, memo);
+
+  memo[pos] = totalPaths;
+  return totalPaths;
+};
