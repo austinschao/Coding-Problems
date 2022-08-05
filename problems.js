@@ -1249,3 +1249,33 @@ const uniquePaths = (m, n, r = 0, c = 0, memo = {}) => {
   memo[pos] = totalPaths;
   return totalPaths;
 };
+
+/*
+322. Coin Change
+
+You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
+
+Return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
+
+You may assume that you have an infinite number of each kind of coin.
+*/
+const coinChange = (coins, amount) => {
+  const result = _coinChange(coins, amount);
+  if (result === Infinity) return -1;
+  return result;
+};
+
+const _coinChange = (coins, amount, memo = {}) => {
+  if (amount in memo) return memo[amount];
+  if (amount < 0) return Infinity;
+  if (amount === 0) return 0;
+
+  let minCoins = Infinity;
+
+  for (let coin of coins) {
+    const numCoins = 1 + _coinChange(coins, amount - coin, memo);
+    minCoins = Math.min(minCoins, numCoins);
+  }
+  memo[amount] = minCoins;
+  return minCoins;
+};
