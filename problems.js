@@ -1232,28 +1232,19 @@ Given the two integers m and n, return the number of possible unique paths that 
 
 The test cases are generated so that the answer will be less than or equal to 2 * 109.
 */
-const uniquePaths = (m, n) => {
-  let totalPaths = 0;
-  totalPaths += findPath(m, n, 0, 0);
-
-  return totalPaths;
-};
-
-const findPath = (m, n, row, col, memo = {}) => {
-  const rowInbounds = 0 <= row && row < m;
-  const colInbounds = 0 <= col && col < n;
-  if (!rowInbounds || !colInbounds) return 0;
-
-  const pos = row + "," + col;
-  const target = (m - 1) + "," + (n - 1);
-
-  if (pos === target) return 1;
+const uniquePaths = (m, n, r = 0, c = 0, memo = {}) => {
+  const pos = r + "," + c;
   if (pos in memo) return memo[pos];
 
+  if (r === m || c === n) return 0;
+
+  const target = (m - 1) + "," + (n - 1);
+  if (pos === target) return 1;
+
   let totalPaths = 0;
 
-  totalPaths += findPath(m, n, row + 1, col, memo);
-  totalPaths += findPath(m, n, row, col + 1, memo);
+  totalPaths += uniquePaths(m, n, r + 1, c, memo);
+  totalPaths += uniquePaths(m, n, r, c + 1, memo);
 
   memo[pos] = totalPaths;
   return totalPaths;
