@@ -1294,3 +1294,24 @@ const isSameTree = (p, q) => {
 
   return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
 };
+
+/*
+279. Perfect Squares
+
+Given an integer n, return the least number of perfect square numbers that sum to n.
+
+A perfect square is an integer that is the square of an integer; in other words, it is the product of some integer with itself. For example, 1, 4, 9, and 16 are perfect squares while 3 and 11 are not.
+*/
+const numSquares = (n, memo = {}) => {
+  if (n in memo) return memo[n];
+  if (n === 0) return 0;
+
+  let minSquares = Infinity;
+  for (let i = 1; i <= Math.sqrt(n); i++) {
+    const square = i * i;
+    const squares = 1 + numSquares(n - square, memo);
+    minSquares = Math.min(minSquares, squares);
+  }
+  memo[n] = minSquares;
+  return minSquares;
+};
