@@ -1315,3 +1315,54 @@ const numSquares = (n, memo = {}) => {
   memo[n] = minSquares;
   return minSquares;
 };
+
+/*
+438. Find All Anagrams in a String
+
+Given two strings s and p, return an array of all the start indices of p's anagrams in s. You may return the answer in any order.
+
+An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+*/
+const findAnagrams = (s, p) => {
+  if (p.length > s.length) return [];
+
+  const pCount = {};
+  const sCount = {};
+  for (let i = 0; i < p.length; i++) {
+    const pLtr = p[i];
+    const sLtr = s[i];
+    pCount[pLtr] = pCount[pLtr] === undefined ? 1 : pCount[pLtr] + 1;
+    sCount[sLtr] = sCount[sLtr] === undefined ? 1 : sCount[sLtr] + 1;
+  }
+
+  const anagrams = isAnagram(sCount, pCount) ? [0] : [];
+
+  let left = 0;
+
+  for (let right = p.length; right < s.length; right++) {
+    const ltr = s[right];
+    sCount[ltr] = sCount[ltr] === undefined ? 1 : sCount[ltr] + 1;
+    sCount[s[left]] -= 1;
+    if (sCount[s[left]] === 0) {
+      delete sCount[s[left]];
+    }
+    left++;
+    if (isAnagram(sCount, pCount)) anagrams.push(left);
+  }
+
+  return anagrams;
+
+};
+
+const isAnagram = (sCount, pCount) => {
+  for (let char in sCount) {
+    if (char in pCount === false) {
+      return false;
+    } else {
+      if (sCount[char] !== pCount[char]) {
+        return false;
+      }
+    }
+  }
+  return true;
+};
