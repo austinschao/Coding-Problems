@@ -1366,3 +1366,23 @@ const isAnagram = (sCount, pCount) => {
   }
   return true;
 };
+
+/*
+Medium
+
+Given an integer array nums of unique elements, return all possible subsets (the power set).
+
+The solution set must not contain duplicate subsets. Return the solution in any order.
+*/
+const subsets = nums => {
+  if (nums.length === 0) return [[]];
+
+  const first = nums[0]; // 2
+  const subsetsWithoutFirst = subsets(nums.slice(1));
+  const subsetsWithFirst = [];
+
+  for (let sub of subsetsWithoutFirst) {
+    subsetsWithFirst.push([...sub, first]);
+  }
+  return subsetsWithoutFirst.concat(subsetsWithFirst);
+};
