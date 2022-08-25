@@ -1377,7 +1377,7 @@ The solution set must not contain duplicate subsets. Return the solution in any 
 const subsets = nums => {
   if (nums.length === 0) return [[]];
 
-  const first = nums[0]; // 2
+  const first = nums[0];
   const subsetsWithoutFirst = subsets(nums.slice(1));
   const subsetsWithFirst = [];
 
