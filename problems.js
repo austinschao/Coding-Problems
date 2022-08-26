@@ -1386,3 +1386,31 @@ const subsets = nums => {
   }
   return subsetsWithoutFirst.concat(subsetsWithFirst);
 };
+
+/*
+74. Search a 2D Matrix
+Medium
+
+Write an efficient algorithm that searches for a value target in an m x n integer matrix matrix. This matrix has the following properties:
+
+Integers in each row are sorted from left to right.
+The first integer of each row is greater than the last integer of the previous row.
+*/
+const searchMatrix = (matrix, target) => {
+  for (let row of matrix) {
+    if (row[0] <= target) {
+      if (findTarget(row, target)) {
+        return true;
+      }
+    }
+  }
+  return false;
+
+};
+
+const findTarget = (row, target) => {
+  for (let num of row) {
+    if (num === target) return true;
+  }
+  return false;
+};
