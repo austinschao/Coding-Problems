@@ -1504,3 +1504,21 @@ const isLLPalindrome = (head) => {
 
   return values.join(",") === values.reverse().join(",");
 };
+
+/*
+876. Middle of the Linked List
+
+Given the head of a singly linked list, return the middle node of the linked list.
+
+If there are two middle nodes, return the second middle node.
+*/
+const middleNode = head => {
+  let slow = head;
+  let fast = head;
+
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  return slow;
+}
