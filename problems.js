@@ -1368,7 +1368,7 @@ const isAnagram = (sCount, pCount) => {
 };
 
 /*
-Medium
+78. Subsets
 
 Given an integer array nums of unique elements, return all possible subsets (the power set).
 
@@ -1389,7 +1389,6 @@ const subsets = nums => {
 
 /*
 74. Search a 2D Matrix
-Medium
 
 Write an efficient algorithm that searches for a value target in an m x n integer matrix matrix. This matrix has the following properties:
 
@@ -1413,4 +1412,47 @@ const findTarget = (row, target) => {
     if (num === target) return true;
   }
   return false;
+};
+
+/*
+73. Set Matrix Zeroes
+
+Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's.
+
+You must do it in place.
+*/
+const setZeroes = matrix => {
+  const visited = new Set();
+  for (let r = 0; r < matrix.length; r++) {
+    for (let c = 0; c < matrix[0].length; c++) {
+      if (matrix[r][c] === 0) {
+        convertToZeroes(matrix, r, c, visited);
+      }
+    }
+  }
+};
+const convertToZeroes = (matrix, r, c, visited) => {
+  const pos = r + "," + c;
+  if (visited.has(pos)) return;
+
+  if (matrix[r][c] !== 0) {
+    matrix[r][c] = 0;
+    visited.add(pos);
+  }
+
+  for (let row = 0; row < matrix.length; row++) {
+    const pos = row + "," + c;
+    if (matrix[row][c] !== 0) {
+      matrix[row][c] = 0;
+      visited.add(pos);
+    }
+  }
+
+  for (let col = 0; col < matrix[r].length; col++) {
+    const pos = r + "," + col;
+    if (matrix[r][col] !== 0) {
+      matrix[r][col] = 0;
+      visited.add(pos);
+    }
+  }
 };
