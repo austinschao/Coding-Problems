@@ -1521,4 +1521,41 @@ const middleNode = head => {
     fast = fast.next.next;
   }
   return slow;
-}
+};
+
+/*
+235. Lowest Common Ancestor of a Binary Search Tree
+
+Given a binary search tree (BST), find the lowest common ancestor (LCA) node of two given nodes in the BST.
+
+According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”
+*/
+
+const lowestCommonAncestor = (root, p, q) => {
+  const pVals = findPath(root, p);
+  const qVals = new Set(findPath(root, q));
+
+  for (let val of pVals) {
+    if (qVals.has(val)) return val;
+  }
+};
+
+const findPath = (root, target) => {
+  if (!root) return null;
+  if (root.val === target.val) return [root];
+
+  const leftPath = findPath(root.left, target);
+  const rightPath = findPath(root.right, target);
+
+  if (leftPath) {
+    leftPath.push(root);
+    return leftPath;
+  }
+
+  if (rightPath) {
+    rightPath.push(root);
+    return rightPath;
+  }
+
+  return null;
+};
