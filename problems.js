@@ -1486,3 +1486,21 @@ const isSame = (tree1, tree2) => {
 
   return isSame(tree1.left, tree2.left) && isSame(tree1.right, tree2.right);
 };
+
+/*
+234. Palindrome Linked List
+
+Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
+*/
+const isLLPalindrome = (head) => {
+
+  const values = [];
+  let curr = head;
+
+  while (curr) {
+    values.push(curr.val);
+    curr = curr.next;
+  }
+
+  return values.join(",") === values.reverse().join(",");
+};
