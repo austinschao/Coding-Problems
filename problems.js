@@ -1616,3 +1616,20 @@ const isValidBST = (root, left = -Infinity, right = Infinity) => {
   if ((root.val > left && root.val < right) === false) return false;
   return isValidBST(root.left, left, root.val) && isValidBST(root.right, root.val, right);
 };
+
+/*
+105. Construct Binary Tree from Preorder and Inorder Traversal
+
+Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the inorder traversal of the same tree, construct and return the binary tree.
+*/
+const buildTree = function (preorder, inorder) {
+  if (preorder.length === 0 || inorder.length === 0) return null;
+
+  const root = new TreeNode(preorder[0]);
+  const mid = inorder.indexOf(root.val);
+
+  root.left = buildTree(preorder.slice(1, mid + 1), inorder.slice(0, mid));
+  root.right = buildTree(preorder.slice(mid + 1), inorder.slice(mid + 1));
+
+  return root;
+};
