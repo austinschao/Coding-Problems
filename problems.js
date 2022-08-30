@@ -1559,3 +1559,43 @@ const findPath = (root, target) => {
 
   return null;
 };
+
+/*
+102. Binary Tree Level Order Traversal
+
+Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+*/
+const levelOrderIteratively = root => {
+  if (!root) return [];
+  const result = [];
+  const queue = [[root, 0]];
+
+  while (queue.length) {
+    const [curr, distance] = queue.shift();
+    if (curr.left) {
+      queue.push([curr.left, distance + 1]);
+    }
+    if (curr.right) {
+      queue.push([curr.right, distance + 1]);
+    }
+    if (result[distance] === undefined) {
+      result[distance] = [curr.val];
+    } else {
+      result[distance].push(curr.val);
+    }
+  }
+  return result;
+};
+
+const levelOrderRecursively = (root, distance = 0, result = []) => {
+  if (!root) return result;
+  if (result[distance] === undefined) {
+    result[distance] = [root.val];
+  } else {
+    result[distance].push(root.val);
+  }
+  levelOrderRecursively(root.left, distance + 1, result);
+  levelOrderRecursively(root.right, distance + 1, result);
+
+  return result;
+};
