@@ -1654,3 +1654,43 @@ const leftyNodes = root => {
   traverse(root, 0);
   return values;
 };
+
+/*
+Write a function, tolerantTeams, that takes in an array of rivalries as an argument. A rivalry is a pair of people who should not be placed on the same team. The function should return a boolean indicating whether or not it is possible to separate people into two teams, without rivals being on the same team. The two teams formed do not have to be the same size.
+*/
+const tolerantTeams = (rivalries) => {
+  const graph = buildGraph(rivalries);
+  const coloring = {};
+  for (let node in graph) {
+    if (!(node in coloring) && !isBipartite(graph, node, coloring, false)) {
+      return false;
+    }
+  }
+  return true;
+};
+
+const isBipartite = (graph, currNode, coloring, color) => {
+  if (currNode in coloring) return coloring[currNode] === color;
+  coloring[currNode] = color;
+
+  for (let neighbor of graph[currNode]) {
+    if (isBipartite(graph, neighbor, coloring, !color) === false) {
+      return false;
+    }
+  }
+  return true;
+};
+
+
+const buildGraph = edges => {
+  const graph = {};
+
+  for (let edge of edges) {
+    const [a, b] = edge;
+    if (graph[a] === undefined) graph[a] = [];
+    if (graph[b] === undefined) graph[b] = [];
+    graph[a].push(b);
+    graph[b].push(a);
+  }
+  return graph;
+};
