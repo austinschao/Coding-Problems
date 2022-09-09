@@ -1633,3 +1633,24 @@ const buildTree = function (preorder, inorder) {
 
   return root;
 };
+
+/*
+Given a binary tree, return an array containing all of the left most nodes.
+*/
+const leftyNodes = root => {
+  const values = [];
+
+  const traverse = (root, level) => {
+    if (!root) return;
+
+    if (values[level] === undefined) {
+      values.push(root.val);
+    }
+    traverse(root.left, level + 1);
+    traverse(root.right, level + 1);
+  };
+
+
+  traverse(root, 0);
+  return values;
+};
